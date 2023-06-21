@@ -66,9 +66,9 @@ export default {
   font-family: Consolas;
 }
 
-body {
-  background: url(../assets/madera.jpg);
-}
+/* body {
+   background: url(../assets/madera.jpg); 
+} */
 
 .taller {
   font-style: italic;

@@ -1,9 +1,7 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <Calculadora />
-  <!-- <Contador titulo="Estudiante" valor2="2" />
-  <Contador titulo="Profesor" valor2="7" />
-  <Contador titulo="Test Titulo" valor2="7" />  -->
+  <Contador titulo="Estudiante" :inicio="400+2" />
+  <Contador titulo="Profesor" :inicio="101"/>
 </template>
 
 <script>
@@ -12,7 +10,7 @@ import Contador from "./components/Contador.vue";
 export default {
   name: "App",
   components: {
-    Calculadora,
+    Contador,
   },
 };
 </script>
