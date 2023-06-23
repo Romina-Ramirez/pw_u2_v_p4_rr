@@ -1,27 +1,89 @@
 <template>
   <h1>Caracola Mágica</h1>
-  <img
-    src="https://via.placeholder.com/250"
-    alt="No se puede mostrar la imagen."
-  />
-  <input v-model="pregunta" type="text" placeholder="Hazme una pregunta."/>
-  <p>Recuerda terminar con un enter la pregunta</p>
+  <img v-if="urlImg" :src="urlImg" alt="No se puede mostrar la imagen." />
+  <div class="bg-dark"></div>
 
-  <div>
-    <h2>¿Voy a pasar de año?</h2>
-    <h1>SI, NO</h1>
+  <div class="container">
+    <input v-model="pregunta" type="text" placeholder="Hazme una pregunta." />
+    <p>Recuerda terminar con un signo de interrogación la pregunta.</p>
+
+    <div>
+      <h2>{{ pregunta }}</h2>
+      <h1>{{ respuesta }}</h1>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-    data (){
-        return {
-            pregunta: 'Hola mundo'
-        }
-    }
+  data() {
+    return {
+      pregunta: "",
+      respuesta: "",
+      urlImg: null,
+    };
+  },
+  watch: {
+    pregunta(value, oldValue) {
+      console.log(value);
+      console.log(oldValue);
+      if (value.includes("?")) {
+        console.log("Consumir el API");
+        this.consumirAPI();
+      }
+    },
+  },
+  methods: {
+    async consumirAPI() {
+      const respuesta = await fetch("https://yesno.wtf/api").then((r) =>
+        r.json()
+      );
+      console.log(respuesta);
+      const { answer, image } = respuesta;
+      console.log(answer);
+      console.log(image);
+      this.respuesta = answer;
+      this.urlImg = image;
+    },
+  },
 };
 </script>
 
 <style>
+.bg-dark, img {
+  height: 100vh;
+  width: 100vw;
+  left: 0px;
+  max-width: 100%;
+  max-height: 100%;
+  position: fixed;
+  top: 0px;
+}
+
+.bg-dark {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.container {
+  text-align: center;
+  position: relative;
+}
+
+input {
+  width: 250px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+}
+
+p, h1, h2 {
+  color: white;
+  font-weight: bold;
+}
+
+p {
+  font-size: 20px;
+  margin-top: 0px;
+}
+
 </style>
