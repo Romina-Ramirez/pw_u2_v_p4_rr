@@ -1,15 +1,14 @@
 <template>
-  <h1>Caracola Mágica</h1>
   <img v-if="urlImg" :src="urlImg" alt="No se puede mostrar la imagen." />
   <div class="bg-dark"></div>
-
   <div class="container">
+    <h1>Caracola Mágica</h1>
     <input v-model="pregunta" type="text" placeholder="Hazme una pregunta." />
     <p>Recuerda terminar con un signo de interrogación la pregunta.</p>
 
     <div>
       <h2>{{ pregunta }}</h2>
-      <h1>{{ respuesta }}</h1>
+      <h1>{{ respuesta.toUpperCase() }}</h1>
     </div>
   </div>
 </template>
@@ -29,7 +28,9 @@ export default {
       console.log(oldValue);
       if (value.includes("?")) {
         console.log("Consumir el API");
+        this.respuesta = 'Espere por favor.'
         this.consumirAPI();
+        this.pregunta = ''
       }
     },
   },
@@ -50,7 +51,8 @@ export default {
 </script>
 
 <style>
-.bg-dark, img {
+.bg-dark,
+img {
   height: 100vh;
   width: 100vw;
   left: 0px;
@@ -76,14 +78,15 @@ input {
   border: none;
 }
 
-p, h1, h2 {
+p,
+h1,
+h2 {
   color: white;
   font-weight: bold;
 }
 
 p {
   font-size: 20px;
-  margin-top: 0px;
+  margin-top: 20px;
 }
-
 </style>

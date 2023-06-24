@@ -1,13 +1,13 @@
 <template>
-  <CaracolaMagica/>
+  <PokemonPage/>
 </template>
 
 <script>
-import CaracolaMagica from "./components/CaracolaMagica.vue";
+import PokemonPage from './modules/pokemon/pages/PokemonPage.vue'
 export default {
   name: "App",
   components: {
-    CaracolaMagica,
+    PokemonPage,
   },
 };
 </script>
@@ -18,7 +18,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #ffffff;
   margin-top: 60px;
 }
 </style>
