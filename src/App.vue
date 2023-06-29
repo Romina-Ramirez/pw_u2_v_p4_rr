@@ -1,15 +1,13 @@
 <template>
-  <Desafio />
+  <PokemonPage/>
 </template>
 
 <script>
-// import PokemonPage from './modules/pokemon/pages/PokemonPage.vue'
-import Desafio from "./components/Desafio.vue";
+import PokemonPage from './modules/pokemon/pages/PokemonPage.vue'
 export default {
   name: "App",
   components: {
-    // PokemonPage,
-    Desafio,
+    PokemonPage,
   },
 };
 </script>
@@ -20,7 +18,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #ffffff;
+  color: black;
   margin-top: 60px;
 }
 </style>

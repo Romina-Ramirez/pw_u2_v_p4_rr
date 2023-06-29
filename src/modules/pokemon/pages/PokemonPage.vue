@@ -1,7 +1,7 @@
 <template>
   <h1>Juego Pokemon</h1>
-  <PokemonImg/>
-  <PokemonImg/>
+  <PokemonImg :pokemonId="54" :muestraPokemon="false"/>
+  <PokemonOps/>
 </template>
 
 <script>
