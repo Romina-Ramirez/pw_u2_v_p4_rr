@@ -23,7 +23,6 @@ export default {
   },
   computed: {
     imagenFuente() {
-      console.log("Hola");
       //   return (
       //     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/" +
       //     this.pokemonId +
@@ -43,10 +42,11 @@ export default {
 img {
   position: absolute;
   height: 200px;
-  right: 38%;
 }
 
 .contenedorImg {
   height: 200px;
+  display: flex;
+  justify-content: center;
 }
 </style>
