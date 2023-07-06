@@ -1,15 +1,15 @@
 <template>
-  <div class="container">
-    <h1 v-if="!pokemonCorrecto">Espere por favor...</h1>
-    <div v-else>
-      <h1>Juego Pokemon</h1>
-      <PokemonImg :pokemonId="pokemonCorrecto.id" :muestraPokemon="mostrar" />
-      <PokemonOps
-        :opciones="arreglo"
-        @seleccionado="revisarSeleccion($event)"
-      />
-      <button @click="actualizar()">Probar otro</button>
+  <h1 v-if="!pokemonCorrecto">Espere por favor...</h1>
+  <div v-else>
+    <h1>Juego Pokemon</h1>
+    <div class="containerPI">
+      <label for="">Puntaje: {{ puntaje }}</label>
+      <label for="">Intento: {{ intentos }}</label>
     </div>
+    <PokemonImg :pokemonId="pokemonCorrecto.id" :muestraPokemon="mostrar" />
+    <PokemonOps v-if="!deshabilitar" :opciones="arreglo" @seleccionado="revisarSeleccion($event)" />
+    <h2>{{ mensajeMostrado }}</h2>
+    <button @click="actualizar()">Probar otro</button>
   </div>
 </template>
 
@@ -27,11 +27,31 @@ export default {
       arreglo: [],
       pokemonCorrecto: null,
       mostrar: false,
+      puntaje: 0,
+      intentos: 0,
+      ganaste: false,
+      terminado: false,
+      deshabilitar: false,
     };
   },
   components: {
     PokemonImg,
     PokemonOps,
+  },
+  computed: {
+    mensajeMostrado() {
+      if (this.terminado === true) {
+        if (this.ganaste === true) {
+          return (
+            "Felicidades, ganaste el juego con puntaje: " + this.puntaje + "."
+          );
+        } else {
+          return "Perdiste el juego. Deberías intentarlo de nuevo.";
+        }
+      } else {
+        return ""
+      }
+    },
   },
   methods: {
     async cargaJuegoInicial() {
@@ -42,13 +62,32 @@ export default {
       this.pokemonCorrecto = this.arreglo[indicePokemon];
     },
     revisarSeleccion(idSeleccionado) {
-      console.log("Evento en el padre");
-      if (idSeleccionado === this.pokemonCorrecto.id) {
-        this.mostrar = true;
-        console.log("Seleccionado Correcto");
-      } else {
+      this.intentos++;
+      if (idSeleccionado === this.pokemonCorrecto.id && this.intentos === 3) {
+        this.puntaje = 1;
+      } else if (idSeleccionado === this.pokemonCorrecto.id) {
+        if (this.intentos === 1) {
+          this.puntaje = 5;
+        } else if (this.intentos === 2) {
+          this.puntaje = 2;
+        }
+      }
+      this.decidirMensaje(this.intentos, this.puntaje);
+    },
+    decidirMensaje(int, punt) {
+      this.intentos = int;
+      this.puntaje = punt;
+      if (this.intentos === 3 && this.puntaje === 0) {
         this.mostrar = false;
-        console.log("Seleccionado Incorrecto");
+        this.ganaste = false;
+        this.terminado = true;
+        this.deshabilitar = true;
+      }
+      if (this.puntaje > 0) {
+        this.mostrar = true;
+        this.ganaste = true;
+        this.terminado = true;
+        this.deshabilitar = true;
       }
     },
     actualizar() {
@@ -63,6 +102,10 @@ export default {
 </script>
 
 <style>
+* {
+  font-family: "Courier New", Courier, monospace, Times, serif;
+}
+
 html,
 body {
   background: radial-gradient(
@@ -70,10 +113,6 @@ body {
     rgba(255, 154, 118, 1) 0%,
     rgb(254, 93, 130) 100%
   );
-}
-
-h1 {
-  font-family: "Courier New", Courier, monospace, Times, serif;
 }
 
 button {
@@ -91,5 +130,11 @@ button {
 button:hover {
   background-color: #27cce2;
   border: 2px solid #138a9a;
+}
+
+label {
+  margin-inline: 50px;
+  font-size: 20px;
+  font-weight: bold;
 }
 </style>
