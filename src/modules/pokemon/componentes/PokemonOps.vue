@@ -1,12 +1,12 @@
 <template>
   <div class="contenedorOpciones">
-    <!-- <ul> -->
-    <!-- <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li> -->
-    <li v-for="pokemon in opciones" :key="pokemon.id">{{ pokemon.nombre }}</li>
-    <!-- </ul> -->
+    <li
+      v-for="pokemon in opciones"
+      :key="pokemon.id"
+      @click="$emit('seleccionado', pokemon.id)"
+    >
+      {{ pokemon.nombre }}
+    </li>
   </div>
 </template>
 
@@ -16,6 +16,11 @@ export default {
     opciones: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    pruebaEvento() {
+      console.log("Prueba de evento");
     },
   },
 };
@@ -29,21 +34,17 @@ export default {
   align-items: center;
 }
 
-/* ul {
-  list-style-type: none;
-} */
-
 li {
   list-style-type: none;
   border: 2px solid #6971ff;
   border-radius: 5px;
-  background-color: white;
   margin-top: 20px;
   width: 200px;
   cursor: pointer;
   background-color: #a2a6ff;
   padding: 1px;
   font-family: "Courier New", Courier, monospace, Times, serif;
+  font-weight: bold;
 }
 
 li:hover {

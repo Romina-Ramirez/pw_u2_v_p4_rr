@@ -1,6 +1,5 @@
 const obtenerPokemons = async () => {
     // Retornar el array de pokemons
-    console.log('Aleatorio')
     const vectorObj = await obtenerNombresPokemon(obtenerVectorNumerico())
     console.log(vectorObj)
     return vectorObj
@@ -21,10 +20,6 @@ const obtenerNombresPokemon = async ([id1, id2, id3, id4] = []) => {
     const data2 = await consumirAPI(id2)
     const data3 = await consumirAPI(id3)
     const data4 = await consumirAPI(id4)
-    // console.log(data1.name)
-    // console.log(data2.name)
-    // console.log(data3.name)
-    // console.log(data4.name)
     const obj1 = {
         nombre: data1.name,
         id: data1.id
@@ -48,8 +43,6 @@ const obtenerNombresPokemon = async ([id1, id2, id3, id4] = []) => {
 
 const consumirAPI = async (id) => {
     const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(result => result.json())
-    // console.log(data.name)
-    // console.log(data.id)
     return data
 }
 
