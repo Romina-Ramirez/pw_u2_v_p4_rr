@@ -6,7 +6,7 @@ const routes = [
         component: () => import('../modules/pokemon/pages/BienvenidaPage.vue')
     },
     {
-        path: '/juego',
+        path: '/instrucciones',
         component: () => import('../modules/pokemon/pages/JuegoPage.vue')
     },
     {
@@ -14,7 +14,7 @@ const routes = [
         component: () => import('../modules/pokemon/pages/PremiosPage.vue')
     },
     {
-        path: '/pokemon',
+        path: '/juego',
         component: () => import('../modules/pokemon/pages/PokemonPage.vue')
     },
     {

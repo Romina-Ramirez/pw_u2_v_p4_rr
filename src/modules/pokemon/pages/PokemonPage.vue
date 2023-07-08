@@ -1,13 +1,21 @@
 <template>
-  <h1 v-if="!pokemonCorrecto">Espere por favor...</h1>
+  <h1 class="titulo" v-if="!pokemonCorrecto">Espere por favor...</h1>
   <div v-else>
-    <h1>Juego Pokemon</h1>
+    <img
+      id="logo"
+      src="../store/Logo.png"
+      alt="No se puede mostrar la imagen."
+    />
     <div class="containerPI">
       <label for="">Puntaje: {{ puntaje }}</label>
       <label for="">Intento: {{ intentos }}</label>
     </div>
     <PokemonImg :pokemonId="pokemonCorrecto.id" :muestraPokemon="mostrar" />
-    <PokemonOps v-if="!deshabilitar" :opciones="arreglo" @seleccionado="revisarSeleccion($event)" />
+    <PokemonOps
+      v-if="!deshabilitar"
+      :opciones="arreglo"
+      @seleccionado="revisarSeleccion($event)"
+    />
     <h2>{{ mensajeMostrado }}</h2>
     <button @click="actualizar()">Probar otro</button>
   </div>
@@ -49,7 +57,7 @@ export default {
           return "Perdiste el juego. Deberías intentarlo de nuevo.";
         }
       } else {
-        return ""
+        return "";
       }
     },
   },
@@ -78,7 +86,7 @@ export default {
       this.intentos = int;
       this.puntaje = punt;
       if (this.intentos === 3 && this.puntaje === 0) {
-        this.mostrar = false;
+        this.mostrar = true;
         this.ganaste = false;
         this.terminado = true;
         this.deshabilitar = true;
@@ -101,40 +109,14 @@ export default {
 };
 </script>
 
-<style>
-* {
-  font-family: "Courier New", Courier, monospace, Times, serif;
-}
-
-html,
-body {
-  background: radial-gradient(
-    circle,
-    rgba(255, 154, 118, 1) 0%,
-    rgb(254, 93, 130) 100%
-  );
-}
-
-button {
-  border: 2px solid #27cce2;
-  border-radius: 5px;
-  margin-top: 20px;
-  cursor: pointer;
-  background-color: #82f0ff;
-  padding: 5px 10px;
-  font-family: "Courier New", Courier, monospace, Times, serif;
-  font-weight: bold;
-  font-size: large;
-}
-
-button:hover {
-  background-color: #27cce2;
-  border: 2px solid #138a9a;
-}
-
+<style scoped>
 label {
   margin-inline: 50px;
   font-size: 20px;
   font-weight: bold;
+}
+
+.containerPI {
+  margin-bottom: 20px;
 }
 </style>

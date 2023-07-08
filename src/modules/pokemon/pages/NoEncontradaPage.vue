@@ -4,11 +4,11 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style>
-
+<style scoped>
+p {
+  text-align: center;
+}
 </style>
